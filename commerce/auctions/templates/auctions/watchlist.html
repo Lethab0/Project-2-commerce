@@ -1,0 +1,11 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  
+  <ul> 
+    {% for list in lists %}
+       <li> <h6> <a href="item/{{ list.item.id }}">{{ list.item.Title }}</a></h6></li>
+    {% endfor %}
+  </ul>
+  
+{% endblock %}
