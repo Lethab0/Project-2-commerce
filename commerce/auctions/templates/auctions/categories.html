@@ -1,9 +1,0 @@
-{% extends "auctions/layout.html" %}
-
-{% block body %}
-  {% for Category in Categories %}
-    <h3>
-        <a href="/Category_items/{{ Category.Heading }}"> {{ Category.Heading }} </a>
-    </h3>
-  {% endfor %}
-{% endblock %}
