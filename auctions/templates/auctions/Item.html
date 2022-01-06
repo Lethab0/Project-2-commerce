@@ -1,0 +1,73 @@
+{% extends "auctions/layout.html" %}
+
+ 
+
+{% block body %}
+
+{% if won %}
+<H1> Congratulations you won the auction </H1>
+{% endif %}
+{% if lost %}
+<H1> Auction is closed </H1>
+{% endif %}
+{{ message }}
+  
+{% if Item.Auction_open %}
+  <div>
+    {% if Item.Image_url %}
+    <img src="{{ Item.Image_url }}" width="300px" height="200px">
+    {% endif %}
+    <span >
+      <h1>{{ Item.Title }}</h1>
+      {% if user.is_authenticated %}
+      <form action="/watchlist/{{Item.id}}">
+        <button type="submit"> {{ Watchlist }} </button>
+      </form>
+      <br>
+      {% if Item.Auction_open %}
+      <form action="/bid/{{ Item.id }}" method="POST">
+        {% csrf_token %}
+        <input type="number" name="Bid" value="0">
+        <button type="submit"> Bid </button>
+      </form>
+      {% endif %}
+      {% if button %}
+      <form action="/close_bid/{{Item.id}}">
+        <button type="submit"> {{ button }} </button>
+      </form>
+      {% endif %}
+    {% endif %}
+    </span>
+    
+    <h3 >{{ Item.Description }}</h3>
+    <h3>Price : ${{ Item.current_price }}</h3>
+  </div>
+ 
+  <div>
+    <form action="/Comment/{{ Item.id }}" method="POST">
+      {% csrf_token %}
+      <textarea name="Comment_text"></textarea>
+      <button type="submit"> Comment </button>
+    </form>
+    <br>
+    <h4> Comments </h4>
+    <br>
+
+    {% for comment in Comments %}
+      <h5> {{ comment.Text }} </h5>
+      <br>
+      <hr>
+    {% endfor %}
+  </div>
+  <div>
+    {% for comment in Comments %}
+    <h1>
+      {{ commnet.Text }}
+    </h1>
+    {% endfor %}
+    <hr>
+    
+ </div>
+ {% endif %}
+ 
+{% endblock %}

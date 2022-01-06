@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  {% for Category in Categories %}
+    <h3>
+        <a href="/Category_items/{{ Category.Heading }}"> {{ Category.Heading }} </a>
+    </h3>
+  {% endfor %}
+
+
+  {% for item in Items %}
+  <div>  
+    {% if item.Image_url %}
+    <img src="{{ item.Image_url }}" height="200px" width="300px">
+    {% endif %}
+    <h1><a href="/item/{{ item.id }}">{{ item.Title }}</a> </h1>
+    <h3>{{ item.Description }}</h3>
+    <h3> Price : ${{ item.current_price }}</h3>
+    <hr>
+    
+</div>
+  {% endfor %}
+
+{% endblock %}

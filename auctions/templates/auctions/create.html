@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+
+<form action="{% url 'Create_listing' %}" method="POST" >
+    {% csrf_token %}
+    {{ form|crispy }}
+    <label for="cars">Choose a Category :</label>
+    <select name="Item_category" id="Item_Category">
+        {% for Category in Categories %}
+        <option value="{{ Category.Heading }}">{{ Category.Heading }}</option>
+        {% endfor %}
+    </select>
+    <button > Create</button>
+</form>
+
+{% endblock %}
